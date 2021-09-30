@@ -58,10 +58,10 @@ public class JSONKeyValueDeserializationSchema implements KafkaDeserializationSc
             mapper = new ObjectMapper();
         }
         ObjectNode node = mapper.createObjectNode();
-        if (record.key() != null) {
+        if (record.key() != null && record.key().length > 0) {
             node.set("key", mapper.readValue(record.key(), JsonNode.class));
         }
-        if (record.value() != null) {
+        if (record.value() != null && record.value().length > 0) {
             node.set("value", mapper.readValue(record.value(), JsonNode.class));
         }
         if (includeMetadata) {
